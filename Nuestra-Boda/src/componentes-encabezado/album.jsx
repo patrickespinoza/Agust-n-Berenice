@@ -109,7 +109,7 @@ export default function AlbumCompartido() {
               }}
             >
               <img
-                src="/albun.png"
+                src="/album.png"
                 alt="Fotografías del álbum compartido"
                 className="absolute inset-0 h-full w-full object-cover object-center"
                 loading="lazy"

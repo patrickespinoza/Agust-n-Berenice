@@ -51,15 +51,20 @@ export default function Vestimenta() {
           <span className="h-px w-12 bg-[#8FB7D5] sm:w-16" />
         </div>
 
-        <p className="mt-9 font-serif text-3xl italic text-[#111B21] sm:text-4xl">
-          Formal
+        <p className="mt-9 font-serif text-3xl italic text-[#29485A] sm:text-4xl">
+          Casual
+        </p>
+
+        <p className="mx-auto mt-5 max-w-md text-sm leading-7 text-[#26343B] sm:text-base">
+          Queremos que te sientas cómodo y disfrutes cada momento con nosotros.
+          Puedes elegir un atuendo casual que te haga sentir bien.
         </p>
 
         <div className="mx-auto mt-8 max-w-sm border-t border-[#8FB7D5]/60 pt-7">
           <p className="text-sm leading-7 text-[#26343B] sm:text-base">
-            Te pedimos amablemente evitar los colores
-            <strong className="font-semibold text-[#111B21]">
-              {" "}azul y blanco
+            Solo te pedimos evitar los colores{" "}
+            <strong className="font-semibold text-[#29485A]">
+              azul y blanco
             </strong>
             .
           </p>

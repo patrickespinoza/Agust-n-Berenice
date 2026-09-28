@@ -6,7 +6,6 @@ import { ArrowLeft, ArrowRight, Heart } from "lucide-react";
 const images = [
   "/Carrusel01v.jpg",
   "/Carrusel02.jpg",
-  "/Carrusel03.jpg",
   "/Carrusel04.jpg",
   "/Carrusel05.jpg",
 ];

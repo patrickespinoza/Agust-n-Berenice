@@ -7,14 +7,18 @@ import NuestraHistoria from "./componentes-encabezado/Galeria";
 import FraseBiblica from "./componentes-encabezado/Frasefinal";
 import Vestimenta from "./componentes-encabezado/vestimenta";
 import AlbumCompartido from "./componentes-encabezado/album";
+import FraseP from "./componentes-encabezado/frasep";
+import ImagenSeparacion from "./componentes-encabezado/imagenfinal";
 
 export default function PaginaPrincipal() {
 
 
   return (
     <div >
+  <FraseP/>
 
   <DireccionEvento/>
+
 
   <NuestraHistoria/>
 
@@ -30,6 +34,8 @@ export default function PaginaPrincipal() {
 
   
   <Confirmacion/>
+
+  <ImagenSeparacion/>
   
 
       </div>      
