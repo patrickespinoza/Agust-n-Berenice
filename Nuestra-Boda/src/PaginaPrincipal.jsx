@@ -9,6 +9,7 @@ import Vestimenta from "./componentes-encabezado/vestimenta";
 import AlbumCompartido from "./componentes-encabezado/album";
 import FraseP from "./componentes-encabezado/frasep";
 import ImagenSeparacion from "./componentes-encabezado/imagenfinal";
+import Padrinos from "./componentes-encabezado/Padrinos";
 
 export default function PaginaPrincipal() {
 
@@ -16,6 +17,8 @@ export default function PaginaPrincipal() {
   return (
     <div >
   <FraseP/>
+
+  <Padrinos/>
 
   <DireccionEvento/>
 
