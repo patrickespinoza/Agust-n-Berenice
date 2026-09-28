@@ -1,35 +1,61 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ChevronDown,
-  Music2,
   Volume2,
   VolumeX,
 } from "lucide-react";
 import Countdown from "./componentes-encabezado/encabeza-cuenta";
-
 export default function Portada() {
   const audioRef = useRef(null);
-
-  const [mostrarModal, setMostrarModal] = useState(true);
+  const [sobreVisible, setSobreVisible] = useState(true);
+  const [sobreAbriendo, setSobreAbriendo] = useState(false);
+  const aperturaRef = useRef(null);
+  const [musicaActiva, setMusicaActiva] = useState(false);
   const [mostrarContenido, setMostrarContenido] = useState(false);
+  useEffect(() => {
+    if (!sobreVisible) return;
+    const overflowAnterior = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.scrollTo(0, 0);
+    return () => {
+      document.body.style.overflow = overflowAnterior;
+      window.clearTimeout(aperturaRef.current);
+    };
+  }, [sobreVisible]);
 
-  const iniciarExperiencia = async (conSonido) => {
+  const abrirInvitacion = () => {
+    if (sobreAbriendo) return;
+
+    // El audio comienza directamente con el toque del sobre.
     const audio = audioRef.current;
-
     if (audio) {
-      audio.muted = !conSonido;
+      audio.muted = false;
       audio.volume = 0.45;
-
-      try {
-        await audio.play();
-      } catch (error) {
-        console.warn("No fue posible reproducir el audio:", error);
-      }
+      audio.play()
+        .then(() => setMusicaActiva(true))
+        .catch((error) => console.warn("No fue posible iniciar la música:", error));
     }
 
-    setMostrarModal(false);
-    setMostrarContenido(true);
+    setSobreAbriendo(true);
+    aperturaRef.current = window.setTimeout(() => {
+      setMostrarContenido(true);
+      setSobreVisible(false);
+    }, 1650);
+  };
+
+  const alternarMusica = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (!audio.paused) {
+      audio.pause();
+      setMusicaActiva(false);
+    } else {
+      audio.muted = false;
+      audio.play()
+        .then(() => setMusicaActiva(true))
+        .catch((error) => console.warn("No fue posible reproducir la música:", error));
+    }
   };
 
   const bajarContenido = () => {
@@ -38,7 +64,6 @@ export default function Portada() {
       behavior: "smooth",
     });
   };
-
   return (
     <section
       className="
@@ -50,11 +75,72 @@ export default function Portada() {
         text-white
       "
     >
+      {/* SOBRE DE ENTRADA */}
+      <AnimatePresence>
+        {sobreVisible && (
+          <motion.div
+            className="fixed inset-0 z-[60] flex min-h-[100svh] items-center justify-center overflow-hidden bg-[#102B3A] px-5 py-10 text-center text-[#F3FAFC]"
+            style={{ backgroundImage: "radial-gradient(circle at 50% 40%, #294F64 0%, #173D50 46%, #102B3A 100%)" }}
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0, transition: { duration: 0.55 } }}
+          >
+            <div className="pointer-events-none absolute inset-4 border border-[#8FB7D5]/45 sm:inset-7" />
+            <div className="pointer-events-none absolute inset-[22px] border border-[#8FB7D5]/20 sm:inset-9" />
+            <div className="relative mx-auto flex w-full max-w-lg flex-col items-center">
+              <p className="text-[10px] uppercase tracking-[0.4em] text-[#BBD6E5]">Nuestra boda</p>
+              <h2 className="mt-5 font-serif text-[clamp(2.6rem,8vw,4.4rem)] leading-tight">Agustín <span className="italic text-[#BBD6E5]">&</span> Berenice</h2>
+              <p className="mt-2 font-serif text-sm tracking-[0.12em] text-[#D6EDF5]">05 · Diciembre · 2026</p>
+              <div className="mt-8 flex items-center gap-3 text-[#8FB7D5]" aria-hidden="true">
+                <span className="h-px w-12 bg-current/60" /><span className="h-1.5 w-1.5 rotate-45 border border-current" /><span className="h-px w-12 bg-current/60" />
+              </div>
+
+              <button
+                type="button"
+                onClick={abrirInvitacion}
+                disabled={sobreAbriendo}
+                aria-label="Abrir invitación de Agustín y Berenice"
+                className="group relative mt-8 block w-full max-w-[360px] cursor-pointer text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-[#D6EDF5] disabled:cursor-default"
+              >
+                <span className="relative block h-[235px] w-full [perspective:900px] sm:h-[255px]">
+                  {/* La carta asoma al levantarse la solapa. */}
+                  <motion.span
+                    className="absolute inset-x-[8%] bottom-4 z-10 flex h-[88%] flex-col items-center justify-start border border-[#A8D9ED] bg-[#F3FAFC] px-5 pt-7 text-center text-[#173D50] shadow-lg"
+                    initial={false}
+                    animate={{ y: sobreAbriendo ? -108 : 0 }}
+                    transition={{ duration: 0.85, delay: sobreAbriendo ? 0.35 : 0, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <span className="text-[9px] uppercase tracking-[0.28em]">Estás invitado a celebrar</span>
+                    <span className="mt-5 font-serif text-[1.5rem] leading-tight sm:text-[1.7rem]">Agustín <i>&</i> Berenice</span>
+                    <span className="mt-4 h-px w-12 bg-[#8FB7D5]" />
+                    <span className="mt-4 font-serif text-sm">05 de diciembre de 2026</span>
+                  </motion.span>
+                  <span className="absolute inset-x-0 bottom-0 z-20 h-[77%] border border-[#8FB7D5] bg-[#8FB7D5] shadow-[0_22px_50px_rgba(0,0,0,0.28)]" />
+                  <span className="absolute inset-x-0 bottom-0 z-30 h-[77%] bg-[#A8CBE0]" style={{ clipPath: "polygon(0 0, 50% 53%, 0 100%)" }} />
+                  <span className="absolute inset-x-0 bottom-0 z-30 h-[77%] bg-[#A8CBE0]" style={{ clipPath: "polygon(100% 0, 50% 53%, 100% 100%)" }} />
+                  <span className="absolute inset-x-0 bottom-0 z-40 h-[77%] bg-[#BCD7E7]" style={{ clipPath: "polygon(0 100%, 50% 42%, 100% 100%)" }} />
+                  <motion.span
+                    className="absolute inset-x-0 bottom-[77%] z-50 block h-[45%] origin-bottom bg-[#D6EDF5] [backface-visibility:hidden]"
+                    style={{ clipPath: "polygon(0 100%, 50% 0, 100% 100%)" }}
+                    initial={false}
+                    animate={{ rotateX: sobreAbriendo ? 180 : 0, zIndex: sobreAbriendo ? 5 : 50 }}
+                    transition={{ duration: 0.7, ease: "easeInOut" }}
+                  />
+                  {!sobreAbriendo && (
+                    <span className="absolute bottom-[41%] left-1/2 z-50 flex h-12 w-12 -translate-x-1/2 translate-y-1/2 items-center justify-center rounded-full border border-[#BBD6E5] bg-[#173D50] font-serif text-xl text-white shadow-lg transition-transform duration-300 group-hover:scale-110">A<span className="mx-0.5 text-xs">&</span>B</span>
+                  )}
+                </span>
+                <span className="mt-8 block text-center text-[10px] uppercase tracking-[0.29em] text-[#F3FAFC]">
+                  {sobreAbriendo ? "Abriendo invitación…" : "Toca el sobre para abrir"}
+                </span>
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       {/* AUDIO */}
       <audio ref={audioRef} loop preload="auto">
         <source src="/musica.mp3" type="audio/mpeg" />
       </audio>
-
       {/* IMAGEN PRINCIPAL */}
       <motion.img
         src="/portada.jpg"
@@ -92,7 +178,6 @@ export default function Portada() {
           },
         }}
       />
-
       {/* OSCURECIMIENTO GENERAL */}
       <div
         className="
@@ -101,7 +186,6 @@ export default function Portada() {
           bg-black/20
         "
       />
-
       {/* DEGRADADO SUPERIOR */}
       <div
         className="
@@ -113,7 +197,6 @@ export default function Portada() {
           to-transparent
         "
       />
-
       {/* DEGRADADO INFERIOR */}
       <div
         className="
@@ -125,7 +208,6 @@ export default function Portada() {
           to-transparent
         "
       />
-
       {/* OSCURECIMIENTO LATERAL PARA COMPUTADORA */}
       <div
         className="
@@ -139,7 +221,6 @@ export default function Portada() {
           md:block
         "
       />
-
       {/* MARCOS */}
       <div
         className="
@@ -153,7 +234,6 @@ export default function Portada() {
           md:inset-7
         "
       />
-
       <div
         className="
           pointer-events-none
@@ -166,7 +246,6 @@ export default function Portada() {
           md:inset-9
         "
       />
-
       {/* CONTENIDO SOBRE LA IMAGEN */}
       <motion.div
         className="
@@ -249,7 +328,6 @@ export default function Portada() {
             }}
           >
             Agustín
-
             <span
               className="
                 my-2
@@ -267,10 +345,8 @@ export default function Portada() {
             >
               &
             </span>
-
             Berenice
           </motion.h1>
-
           {/* CUENTA REGRESIVA */}
           <motion.div
             className="
@@ -320,10 +396,8 @@ export default function Portada() {
             >
               Faltan
             </p>
-
             <Countdown targetDate="2026-12-05T11:00:00" />
           </motion.div>
-
           {/* BOTÓN BAJAR */}
           <motion.button
             type="button"
@@ -378,9 +452,8 @@ export default function Portada() {
           </motion.button>
         </div>
       </motion.div>
-
       {/* INDICADOR DE MÚSICA */}
-      {!mostrarModal && (
+      {!sobreVisible && (
         <motion.div
           className="
             absolute
@@ -406,7 +479,10 @@ export default function Portada() {
             delay: 0.5,
           }}
         >
-          <div
+          <button
+            type="button"
+            onClick={alternarMusica}
+            aria-label={musicaActiva ? "Pausar música" : "Reproducir música"}
             className="
               flex
               h-10
@@ -422,9 +498,8 @@ export default function Portada() {
               backdrop-blur-md
             "
           >
-            <Music2 size={16} strokeWidth={1.5} />
-          </div>
-
+            {musicaActiva ? <Volume2 size={16} strokeWidth={1.5} /> : <VolumeX size={16} strokeWidth={1.5} />}
+          </button>
           <p
             className="
               hidden
@@ -440,258 +515,6 @@ export default function Portada() {
           </p>
         </motion.div>
       )}
-
-      {/* MODAL DE MÚSICA */}
-      <AnimatePresence>
-        {mostrarModal && (
-          <motion.div
-            className="
-              fixed
-              inset-0
-              z-50
-              flex
-              items-center
-              justify-center
-              bg-[#173D50]/60
-              px-5
-              backdrop-blur-[10px]
-            "
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            exit={{
-              opacity: 0,
-            }}
-            transition={{
-              duration: 0.45,
-            }}
-          >
-            <motion.div
-              className="
-                relative
-                w-full
-                max-w-[390px]
-                overflow-hidden
-                border
-                border-[#8FB7D5]/70
-                bg-[#F3FAFC]
-                px-7
-                py-9
-                text-center
-                shadow-[0_30px_100px_rgba(23,61,80,0.35)]
-                sm:px-9
-              "
-              initial={{
-                opacity: 0,
-                y: 28,
-                scale: 0.96,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                scale: 1,
-              }}
-              exit={{
-                opacity: 0,
-                y: 20,
-                scale: 0.97,
-              }}
-              transition={{
-                duration: 0.55,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-            >
-              <div
-                className="
-                  pointer-events-none
-                  absolute
-                  inset-2
-                  border
-                  border-[#A8D9ED]/80
-                "
-              />
-
-              <div
-                className="
-                  absolute
-                  left-1/2
-                  top-0
-                  h-px
-                  w-32
-                  -translate-x-1/2
-                  bg-gradient-to-r
-                  from-transparent
-                  via-[#57B9CC]
-                  to-transparent
-                "
-              />
-
-              <div className="relative">
-                <div
-                  className="
-                    mx-auto
-                    flex
-                    h-14
-                    w-14
-                    items-center
-                    justify-center
-                    rounded-full
-                    border
-                    border-[#8FB7D5]
-                    bg-[#D6EDF5]
-                    shadow-sm
-                  "
-                >
-                  <Music2
-                    size={21}
-                    strokeWidth={1.4}
-                    className="text-[#173D50]"
-                  />
-                </div>
-
-                <p
-                  className="
-                    mt-6
-                    text-[9px]
-                    uppercase
-                    tracking-[0.45em]
-                    text-[#29485A]
-                  "
-                >
-                  Bienvenidos
-                </p>
-
-                <h2
-                  className="
-                    mt-3
-                    font-serif
-                    text-[1.7rem]
-                    font-normal
-                    leading-tight
-                    text-[#111B21]
-                  "
-                >
-                  Una experiencia
-
-                  <span
-                    className="
-                      block
-                      italic
-                      text-[#29485A]
-                    "
-                  >
-                    acompañada de música
-                  </span>
-                </h2>
-
-                <div
-                  className="
-                    mx-auto
-                    mt-5
-                    h-px
-                    w-16
-                    bg-[#57B9CC]/70
-                  "
-                />
-
-                <p
-                  className="
-                    mx-auto
-                    mt-5
-                    max-w-[270px]
-                    text-sm
-                    leading-6
-                    text-[#26343B]
-                  "
-                >
-                  Elige cómo deseas disfrutar esta invitación.
-                </p>
-
-                <div className="mt-8 flex flex-col gap-3">
-                  <button
-                    type="button"
-                    onClick={() => iniciarExperiencia(true)}
-                    className="
-                      group
-                      flex
-                      w-full
-                      items-center
-                      justify-center
-                      gap-3
-                      bg-[#8FB7D5]
-                      px-5
-                      py-3.5
-                      text-[10px]
-                      uppercase
-                      tracking-[0.24em]
-                      text-[#111B21]
-                      shadow-[0_10px_25px_rgba(74,139,170,0.22)]
-                      transition
-                      duration-300
-                      hover:bg-[#77A7CA]
-                    "
-                  >
-                    <Volume2
-                      size={15}
-                      strokeWidth={1.5}
-                      className="transition group-hover:scale-110"
-                    />
-
-                    Activar sonido
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => iniciarExperiencia(false)}
-                    className="
-                      group
-                      flex
-                      w-full
-                      items-center
-                      justify-center
-                      gap-3
-                      border
-                      border-[#8FB7D5]
-                      px-5
-                      py-3.5
-                      text-[10px]
-                      uppercase
-                      tracking-[0.24em]
-                      text-[#111B21]
-                      transition
-                      duration-300
-                      hover:bg-[#D6EDF5]
-                    "
-                  >
-                    <VolumeX
-                      size={15}
-                      strokeWidth={1.5}
-                      className="transition group-hover:scale-110"
-                    />
-
-                    Continuar en silencio
-                  </button>
-                </div>
-
-                <p
-                  className="
-                    mt-6
-                    font-serif
-                    text-xs
-                    italic
-                    text-[#29485A]
-                  "
-                >
-                  Agustín & Berenice
-                </p>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   );
 }
