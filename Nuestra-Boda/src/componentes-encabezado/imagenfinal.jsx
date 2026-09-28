@@ -89,9 +89,6 @@ export default function ImagenSeparacion() {
             ease: [0.22, 1, 0.36, 1],
           }}
         >
-          <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white/45 bg-white/10 backdrop-blur-md">
-            <Heart size={20} strokeWidth={1.3} />
-          </div>
 
           <p className="mt-7 text-[9px] uppercase tracking-[0.5em] text-white/80 sm:text-[10px]">
             Nuestro gran día
