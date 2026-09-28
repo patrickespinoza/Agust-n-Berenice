@@ -52,13 +52,13 @@ export default function Portada() {
     >
       {/* AUDIO */}
       <audio ref={audioRef} loop preload="auto">
-        <source src="/TylerShaw.mp3" type="audio/mpeg" />
+        <source src="/musica.mp3" type="audio/mpeg" />
       </audio>
 
       {/* IMAGEN PRINCIPAL */}
       <motion.img
-        src="/portada.png"
-        alt="María y Jonathan"
+        src="/portada.jpg"
+        alt="Agustín y Berenice"
         className="
           absolute
           inset-0
@@ -214,8 +214,6 @@ export default function Portada() {
             items-center
           "
         >
-
-
           {/* NOMBRES */}
           <motion.h1
             className="
@@ -250,7 +248,7 @@ export default function Portada() {
               ease: [0.22, 1, 0.36, 1],
             }}
           >
-            María
+            Agustín
 
             <span
               className="
@@ -270,9 +268,8 @@ export default function Portada() {
               &
             </span>
 
-            Jonathan
+            Berenice
           </motion.h1>
-
 
           {/* CUENTA REGRESIVA */}
           <motion.div
@@ -324,7 +321,7 @@ export default function Portada() {
               Faltan
             </p>
 
-            <Countdown targetDate="2027-06-11T00:00:00" />
+            <Countdown targetDate="2026-12-05T11:00:00" />
           </motion.div>
 
           {/* BOTÓN BAJAR */}
@@ -455,7 +452,7 @@ export default function Portada() {
               flex
               items-center
               justify-center
-              bg-black/55
+              bg-[#173D50]/60
               px-5
               backdrop-blur-[10px]
             "
@@ -479,12 +476,12 @@ export default function Portada() {
                 max-w-[390px]
                 overflow-hidden
                 border
-                border-[#C7A46A]/40
-                bg-[#F8F5F0]
+                border-[#8FB7D5]/70
+                bg-[#F3FAFC]
                 px-7
                 py-9
                 text-center
-                shadow-[0_30px_100px_rgba(0,0,0,0.4)]
+                shadow-[0_30px_100px_rgba(23,61,80,0.35)]
                 sm:px-9
               "
               initial={{
@@ -513,7 +510,7 @@ export default function Portada() {
                   absolute
                   inset-2
                   border
-                  border-[#B89B5E]/15
+                  border-[#A8D9ED]/80
                 "
               />
 
@@ -527,7 +524,7 @@ export default function Portada() {
                   -translate-x-1/2
                   bg-gradient-to-r
                   from-transparent
-                  via-[#B89B5E]
+                  via-[#57B9CC]
                   to-transparent
                 "
               />
@@ -543,15 +540,15 @@ export default function Portada() {
                     justify-center
                     rounded-full
                     border
-                    border-[#B89B5E]/45
-                    bg-[#F3EEE6]
+                    border-[#8FB7D5]
+                    bg-[#D6EDF5]
                     shadow-sm
                   "
                 >
                   <Music2
                     size={21}
                     strokeWidth={1.4}
-                    className="text-[#B89B5E]"
+                    className="text-[#173D50]"
                   />
                 </div>
 
@@ -561,7 +558,7 @@ export default function Portada() {
                     text-[9px]
                     uppercase
                     tracking-[0.45em]
-                    text-[#9E8E7B]
+                    text-[#29485A]
                   "
                 >
                   Bienvenidos
@@ -574,7 +571,7 @@ export default function Portada() {
                     text-[1.7rem]
                     font-normal
                     leading-tight
-                    text-[#3F352E]
+                    text-[#111B21]
                   "
                 >
                   Una experiencia
@@ -583,7 +580,7 @@ export default function Portada() {
                     className="
                       block
                       italic
-                      text-[#8F7D68]
+                      text-[#29485A]
                     "
                   >
                     acompañada de música
@@ -596,7 +593,7 @@ export default function Portada() {
                     mt-5
                     h-px
                     w-16
-                    bg-[#C7A46A]/60
+                    bg-[#57B9CC]/70
                   "
                 />
 
@@ -607,7 +604,7 @@ export default function Portada() {
                     max-w-[270px]
                     text-sm
                     leading-6
-                    text-[#6D5E52]
+                    text-[#26343B]
                   "
                 >
                   Elige cómo deseas disfrutar esta invitación.
@@ -624,17 +621,17 @@ export default function Portada() {
                       items-center
                       justify-center
                       gap-3
-                      bg-[#8F7D68]
+                      bg-[#8FB7D5]
                       px-5
                       py-3.5
                       text-[10px]
                       uppercase
                       tracking-[0.24em]
-                      text-white
-                      shadow-[0_10px_25px_rgba(109,94,82,0.18)]
+                      text-[#111B21]
+                      shadow-[0_10px_25px_rgba(74,139,170,0.22)]
                       transition
                       duration-300
-                      hover:bg-[#756453]
+                      hover:bg-[#77A7CA]
                     "
                   >
                     <Volume2
@@ -657,16 +654,16 @@ export default function Portada() {
                       justify-center
                       gap-3
                       border
-                      border-[#B8A999]/70
+                      border-[#8FB7D5]
                       px-5
                       py-3.5
                       text-[10px]
                       uppercase
                       tracking-[0.24em]
-                      text-[#6D5E52]
+                      text-[#111B21]
                       transition
                       duration-300
-                      hover:bg-[#EFE6DA]
+                      hover:bg-[#D6EDF5]
                     "
                   >
                     <VolumeX
@@ -685,10 +682,10 @@ export default function Portada() {
                     font-serif
                     text-xs
                     italic
-                    text-[#9E8E7B]
+                    text-[#29485A]
                   "
                 >
-                  María & Jonathan
+                  Agustín & Berenice
                 </p>
               </div>
             </motion.div>

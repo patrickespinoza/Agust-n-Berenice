@@ -1,3 +1,5 @@
+// FraseBiblica.jsx
+import React from "react";
 import { motion } from "framer-motion";
 
 const fadeUp = {
@@ -15,52 +17,44 @@ const fadeUp = {
 export default function FraseBiblica() {
   return (
     <motion.section
+      id="frase-biblica"
       variants={fadeUp}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true }}
-      className="relative overflow-hidden bg-[#F8F5F0] py-32 px-6"
+      viewport={{ once: true, amount: 0.2 }}
+      className="relative isolate overflow-hidden bg-[#A8DFE1] px-6 py-28 text-[#111B21] sm:py-32"
     >
-      {/* Fondo */}
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,#FBF9F5_0%,#F2EBE2_100%)]" />
+      {/* FONDO AQUA */}
+      <div className="pointer-events-none absolute inset-0 -z-20 bg-[linear-gradient(180deg,#BCE9EA_0%,#A8DFE1_55%,#8FD1D8_100%)]" />
 
-      {/* Luz */}
-      <div className="absolute -left-40 -top-32 w-[450px] h-[450px] rounded-full bg-white/70 blur-3xl" />
+      {/* LUCES SUAVES */}
+      <div className="pointer-events-none absolute -left-40 -top-32 -z-10 h-[450px] w-[450px] rounded-full bg-white/25 blur-3xl" />
 
-      <div className="absolute -right-32 bottom-0 w-[400px] h-[400px] rounded-full bg-[#C7A46A]/10 blur-3xl" />
+      <div className="pointer-events-none absolute -right-32 bottom-0 -z-10 h-[400px] w-[400px] rounded-full bg-[#77A7CA]/20 blur-3xl" />
 
-      {/* Marco */}
-      <div className="absolute inset-5 border border-[#C7A46A]/20" />
+      {/* MARCO CLÁSICO */}
+      <div className="pointer-events-none absolute inset-4 border border-[#29485A]/35 sm:inset-6" />
 
-      {/* Contenido */}
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
+      <div className="pointer-events-none absolute inset-[22px] border border-white/40 sm:inset-8" />
 
-        <p className="uppercase tracking-[0.45em] text-[#9E8E7B] text-[10px]">
+      {/* CONTENIDO */}
+      <div className="relative z-10 mx-auto max-w-4xl text-center">
+        <p className="text-[10px] uppercase tracking-[0.4em] text-[#29485A]">
           Una promesa
         </p>
 
-        <div className="mt-6 flex justify-center items-center gap-4">
-          <span className="w-14 h-px bg-[#C7A46A]/60"></span>
-
-          <span className="w-2 h-2 rotate-45 border border-[#B89B5E]"></span>
-
-          <span className="w-14 h-px bg-[#C7A46A]/60"></span>
+        <div className="mt-6 flex items-center justify-center gap-4">
+          <span className="h-px w-14 bg-[#29485A]/50" />
+          <span className="h-2 w-2 rotate-45 border border-[#29485A]" />
+          <span className="h-px w-14 bg-[#29485A]/50" />
         </div>
 
         <motion.blockquote
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1.4 }}
-          className="
-          mt-12
-          font-serif
-          italic
-          text-[#433A34]
-          leading-[1.5]
-          text-[2rem]
-          sm:text-[2.6rem]
-          md:text-[3.2rem]
-          "
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.1, delay: 0.2 }}
+          className="mt-12 font-serif text-[1.85rem] italic leading-[1.5] text-[#111B21] sm:text-[2.6rem] md:text-[3.2rem]"
         >
           Donde quiera que vayas,
           <br />
@@ -72,12 +66,11 @@ export default function FraseBiblica() {
           permaneceré contigo.
         </motion.blockquote>
 
-        <div className="mt-14 w-28 h-px bg-gradient-to-r from-transparent via-[#C7A46A] to-transparent mx-auto"></div>
+        <div className="mx-auto mt-14 h-px w-28 bg-gradient-to-r from-transparent via-[#29485A] to-transparent" />
 
-        <p className="mt-7 uppercase tracking-[0.45em] text-[#8F7D68] text-xs">
+        <p className="mt-7 text-xs uppercase tracking-[0.3em] text-[#29485A]">
           Libro de Rut 1:16
         </p>
-
       </div>
     </motion.section>
   );

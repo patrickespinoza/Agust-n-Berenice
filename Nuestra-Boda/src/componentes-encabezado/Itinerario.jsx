@@ -1,71 +1,122 @@
+// Itinerario.jsx
 import React from "react";
 import { motion } from "framer-motion";
 import {
-  Gem,
-  Wine,
+  Church,
+  Camera,
+  PartyPopper,
   UtensilsCrossed,
+  Martini,
+  GlassWater,
+  Cake,
+  Gift,
+  Candy,
   Music2,
+  Flower2,
+  Sparkles,
 } from "lucide-react";
 
-const ItinerarioPremium = () => {
-  const events = [
-    {
-      time: "18:00",
-      period: "HRS",
-      title: "Ceremonia",
-      description:
-        "Ceremonia civil acompañados de nuestras familias y seres queridos.",
-      icon: Gem,
-    },
-    {
-      time: "19:30",
-      period: "HRS",
-      title: "Recepción",
-      description:
-        "Cóctel de bienvenida y un momento para compartir juntos.",
-      icon: Wine,
-    },
-    {
-      time: "21:00",
-      period: "HRS",
-      title: "Cena",
-      description:
-        "Banquete preparado especialmente para celebrar este gran día.",
-      icon: UtensilsCrossed,
-    },
-    {
-      time: "23:00",
-      period: "HRS",
-      title: "Fiesta",
-      description:
-        "Música, baile y una noche llena de recuerdos inolvidables.",
-      icon: Music2,
-    },
-  ];
+const events = [
+  {
+    time: "11:00",
+    period: "a. m.",
+    title: "Ceremonia religiosa",
+    icon: Church,
+  },
+  {
+    time: "12:00",
+    period: "p. m.",
+    title: "Sesión de fotos de los novios",
+    icon: Camera,
+  },
+  {
+    time: "2:00",
+    period: "p. m.",
+    title: "Recepción",
+    icon: PartyPopper,
+  },
+  {
+    time: "2:00 – 5:00",
+    period: "p. m.",
+    title: "Comida",
+    icon: UtensilsCrossed,
+  },
+  {
+    time: "4:00",
+    period: "p. m.",
+    title: "Apertura de coctelería",
+    icon: Martini,
+  },
+  {
+    time: "5:00",
+    period: "p. m.",
+    title: "Brindis",
+    icon: GlassWater,
+  },
+  {
+    time: "5:20",
+    period: "p. m.",
+    title: "Partida de pastel",
+    icon: Cake,
+  },
+  {
+    time: "5:30",
+    period: "p. m.",
+    title: "Entrega de canastos",
+    icon: Gift,
+  },
+  {
+    time: "6:00",
+    period: "p. m.",
+    title: "Apertura de mesa de dulces",
+    icon: Candy,
+  },
+  {
+    time: "7:00",
+    period: "p. m.",
+    title: "Primer baile de los novios",
+    description: "Después, vals familiar.",
+    icon: Music2,
+  },
+  {
+    time: "7:30",
+    period: "p. m.",
+    title: "Lanzamiento de ramo y corbata",
+    icon: Flower2,
+  },
+  {
+    time: "7:45",
+    period: "p. m.",
+    title: "Bailes tradicionales",
+    icon: Music2,
+  },
+  {
+    time: "8:30",
+    period: "p. m.",
+    title: "Hora loca",
+    description: "¡Es tu momento de brillar!",
+    icon: Sparkles,
+  },
+];
 
+export default function Itinerario() {
   return (
-    <section className="relative isolate overflow-hidden bg-[#F8F5F0] px-5 py-24 sm:px-8 md:py-32">
-      {/* FONDO */}
-      <div className="pointer-events-none absolute inset-0 -z-20 bg-[linear-gradient(180deg,#FBF9F5_0%,#F2EBE2_100%)]" />
+    <section
+      id="itinerario"
+      className="relative isolate overflow-hidden bg-[#A9C5DF] px-5 py-20 text-[#111B21] sm:px-8 sm:py-24 md:py-28"
+    >
+      {/* FONDO SERENITY */}
+      <div className="pointer-events-none absolute inset-0 -z-20 bg-[linear-gradient(180deg,#BDD4E8_0%,#A9C5DF_50%,#94B6D4_100%)]" />
 
-      {/* TEXTURA DE PAPEL */}
-      <div
-        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.045] mix-blend-multiply"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.35'/%3E%3C/svg%3E\")",
-        }}
-      />
+      {/* LUCES DISCRETAS */}
+      <div className="pointer-events-none absolute -left-32 -top-40 -z-10 h-[430px] w-[430px] rounded-full bg-white/25 blur-3xl" />
 
-      {/* LUCES */}
-      <div className="pointer-events-none absolute -left-32 -top-40 -z-10 h-[430px] w-[430px] rounded-full bg-white/70 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-40 -right-32 -z-10 h-[430px] w-[430px] rounded-full bg-[#A8DFE1]/25 blur-3xl" />
 
-      <div className="pointer-events-none absolute -bottom-40 -right-32 -z-10 h-[430px] w-[430px] rounded-full bg-[#B89B5E]/10 blur-3xl" />
-
-      {/* BOTÁNICO IZQUIERDO */}
+      {/* ORNAMENTOS BOTÁNICOS */}
       <svg
         aria-hidden="true"
-        className="pointer-events-none absolute -bottom-10 -left-16 h-72 w-60 text-[#9E8E7B]/16 sm:h-96 sm:w-80"
+        className="pointer-events-none absolute -bottom-10 -left-16 h-72 w-60 text-[#29485A]/20 sm:h-96 sm:w-80"
         viewBox="0 0 250 320"
         fill="none"
       >
@@ -81,10 +132,9 @@ const ItinerarioPremium = () => {
         />
       </svg>
 
-      {/* BOTÁNICO DERECHO */}
       <svg
         aria-hidden="true"
-        className="pointer-events-none absolute -right-16 -top-10 h-72 w-60 rotate-180 text-[#9E8E7B]/12 sm:h-96 sm:w-80"
+        className="pointer-events-none absolute -right-16 -top-10 h-72 w-60 rotate-180 text-[#29485A]/15 sm:h-96 sm:w-80"
         viewBox="0 0 250 320"
         fill="none"
       >
@@ -106,99 +156,94 @@ const ItinerarioPremium = () => {
           className="mx-auto flex max-w-2xl flex-col items-center text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
+          viewport={{ once: true, amount: 0.3 }}
           transition={{
-            duration: 1,
+            duration: 0.9,
             ease: [0.22, 1, 0.36, 1],
           }}
         >
-          <p className="text-[9px] uppercase tracking-[0.5em] text-[#9E8E7B] sm:text-[10px]">
+          <p className="text-[10px] uppercase tracking-[0.35em] text-[#29485A]">
             Programa de celebración
           </p>
 
-          <h2 className="mt-4 font-serif text-4xl font-normal text-[#433A34] sm:text-5xl md:text-6xl">
+          <h2 className="mt-4 font-serif text-4xl font-normal text-[#111B21] sm:text-5xl md:text-6xl">
             Itinerario
           </h2>
 
           <div className="mt-6 flex items-center gap-4">
-            <span className="h-px w-12 bg-[#C7A46A]/60 sm:w-20" />
-            <span className="h-2 w-2 rotate-45 border border-[#B89B5E]" />
-            <span className="h-px w-12 bg-[#C7A46A]/60 sm:w-20" />
+            <span className="h-px w-12 bg-[#29485A]/50 sm:w-20" />
+            <span className="h-2 w-2 rotate-45 border border-[#29485A]" />
+            <span className="h-px w-12 bg-[#29485A]/50 sm:w-20" />
           </div>
 
-          <p className="mt-6 max-w-xl font-serif text-lg italic leading-relaxed text-[#6D5E52] sm:text-xl">
+          <p className="mt-6 max-w-xl font-serif text-lg italic leading-relaxed text-[#26343B] sm:text-xl">
             Cada momento ha sido preparado para compartirlo contigo.
           </p>
         </motion.div>
 
         {/* PROGRAMA */}
-        <div className="relative mx-auto mt-16 max-w-4xl border-y border-[#C7A46A]/30">
+        <div className="relative mx-auto mt-12 max-w-4xl border-y border-[#29485A]/40 sm:mt-16">
           {events.map((event, index) => {
             const Icon = event.icon;
 
             return (
               <motion.article
-                key={event.title}
-                className={`relative grid grid-cols-[90px_1fr] gap-5 px-1 py-9 sm:grid-cols-[150px_1fr] sm:gap-10 sm:px-6 sm:py-12 md:grid-cols-[190px_1fr] ${
+                key={`${event.time}-${event.title}`}
+                className={`relative grid grid-cols-[94px_minmax(0,1fr)] gap-4 px-1 py-6 sm:grid-cols-[150px_minmax(0,1fr)] sm:gap-9 sm:px-6 sm:py-8 md:grid-cols-[190px_minmax(0,1fr)] ${
                   index !== events.length - 1
-                    ? "border-b border-[#C7A46A]/25"
+                    ? "border-b border-[#29485A]/25"
                     : ""
                 }`}
-                initial={{ opacity: 0, y: 35 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.35 }}
+                viewport={{ once: true, amount: 0.2 }}
                 transition={{
-                  duration: 0.9,
-                  delay: index * 0.1,
+                  duration: 0.7,
+                  delay: Math.min(index * 0.04, 0.25),
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
                 {/* HORA */}
-                <div className="flex flex-col items-center justify-center border-r border-[#C7A46A]/25 pr-5 text-center sm:pr-10">
-                  <span className="font-serif text-2xl leading-none text-[#433A34] sm:text-4xl md:text-5xl">
+                <div className="flex flex-col items-center justify-center border-r border-[#29485A]/35 pr-3 text-center sm:pr-9">
+                  <time className="font-serif text-[21px] leading-tight text-[#111B21] sm:text-3xl md:text-4xl">
                     {event.time}
-                  </span>
+                  </time>
 
-                  <span className="mt-3 text-[7px] uppercase tracking-[0.35em] text-[#9E8E7B] sm:text-[9px]">
+                  <span className="mt-1 text-[10px] uppercase tracking-[0.12em] text-[#29485A] sm:mt-2">
                     {event.period}
                   </span>
                 </div>
 
-                {/* INFORMACIÓN */}
-                <div className="flex items-center gap-4 sm:gap-7">
-                  <div className="hidden h-14 w-14 shrink-0 items-center justify-center rounded-full border border-[#C7A46A]/35 bg-white/30 sm:flex">
+                {/* EVENTO */}
+                <div className="flex min-w-0 items-center gap-4 sm:gap-6">
+                  <div className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#29485A]/35 bg-white/65 sm:flex">
                     <Icon
-                      size={21}
-                      strokeWidth={1.25}
-                      className="text-[#B89B5E]"
+                      size={20}
+                      strokeWidth={1.4}
+                      className="text-[#29485A]"
                     />
                   </div>
 
-                  <div>
-                    <div className="mb-3 flex items-center gap-3 sm:hidden">
-                      <Icon
-                        size={17}
-                        strokeWidth={1.3}
-                        className="text-[#B89B5E]"
-                      />
+                  <div className="min-w-0">
+                    <Icon
+                      size={18}
+                      strokeWidth={1.4}
+                      className="mb-2 text-[#29485A] sm:hidden"
+                    />
 
-                      <span className="h-px w-8 bg-[#C7A46A]/50" />
-                    </div>
-
-                    <h3 className="font-serif text-2xl font-normal text-[#433A34] sm:text-3xl md:text-4xl">
+                    <h3 className="font-serif text-xl font-normal leading-snug text-[#111B21] sm:text-2xl md:text-3xl">
                       {event.title}
                     </h3>
 
-                    <p className="mt-3 max-w-xl text-sm leading-6 text-[#6D5E52] sm:text-base sm:leading-7">
-                      {event.description}
-                    </p>
+                    {event.description && (
+                      <p className="mt-2 text-sm leading-relaxed text-[#26343B]">
+                        {event.description}
+                      </p>
+                    )}
                   </div>
                 </div>
 
-                {/* NÚMERO DECORATIVO */}
-                <span className="pointer-events-none absolute right-2 top-1/2 hidden -translate-y-1/2 font-serif text-[5rem] leading-none text-[#B89B5E]/5 md:block">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
+
               </motion.article>
             );
           })}
@@ -210,21 +255,19 @@ const ItinerarioPremium = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.9, delay: 0.25 }}
+          transition={{ duration: 0.9 }}
         >
-          <span className="h-px w-16 bg-gradient-to-r from-transparent via-[#C7A46A] to-transparent" />
+          <span className="h-px w-16 bg-gradient-to-r from-transparent via-[#29485A] to-transparent" />
 
-          <p className="mt-5 text-[9px] uppercase tracking-[0.4em] text-[#9E8E7B]">
+          <p className="mt-5 text-[10px] uppercase tracking-[0.35em] text-[#29485A]">
             Te esperamos
           </p>
 
-          <p className="mt-3 font-serif text-xl italic text-[#433A34] sm:text-2xl">
+          <p className="mt-3 font-serif text-xl italic text-[#111B21] sm:text-2xl">
             para celebrar juntos cada instante
           </p>
         </motion.div>
       </div>
     </section>
   );
-};
-
-export default ItinerarioPremium;
+}
